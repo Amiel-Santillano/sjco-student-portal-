@@ -1,0 +1,577 @@
+<div class="profile-title">
+  <mat-card appearance="outlined">
+    <mat-card-content>
+      <strong>Profile/Enlistment</strong>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" height="15" width="20" style="padding-left: 5px;">
+        <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z"/>
+      </svg>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <p>This section is for updating of profile and enlistment. The information that will be gathered are as follows: personal information, educational background, family background, health information, government membership, and other information like 
+      available devices, talents, etc. After completing all the required <strong>(*)</strong> information, 
+      then you may proceed with enlistment which is in the last step of the process.</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <tbody class="align-middle">
+          <tr><td class="hcol-label"><strong>Student Number</strong></td><td class="hcol-content">000000</td></tr>
+          <tr><td class="hcol-label"><strong>Fullname</strong></td><td class="hcol-content upcase">Jake Cyrus</td></tr>
+          <tr><td class="hcol-label"><strong>Program</strong></td><td class="hcol-content">BSGC - Garbage Collector</td></tr>
+          <tr><td class="hcol-label"><strong>Email Address</strong></td><td class="hcol-content">*email*</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<mat-accordion class="header-align">
+  <mat-expansion-panel [expanded]="step() === 0" (opened)="setStep(0)" hideToggle>
+    <mat-expansion-panel-header>
+      <div class="mat-step-icon mat-step-icon-state-number mat-step-icon-selected">
+        <div class="mat-step-icon-content">
+          <span aria-hidden= "true" class="ng-star-inserted">1</span>
+        </div>
+      </div>
+      <mat-panel-title style="font-weight: 700;">DATA PRIVACY STATEMENT
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+     
+    <form [formGroup]="dataprivacyForm">
+    <p style="font-style: italic; font-weight: 400;">By clicking the <strong>"Done"</strong> button, I recognize the authority of the SJCO to process my personal and sensitive personal information, pursuant to the SJCO General Privacy Notice and applicable laws, and agree to the collection
+      and use of information in accordance with the policy stated. </p>
+    <mat-action-row>
+      <button mat-stroked-button (click)="nextStep()">Done</button>
+    </mat-action-row>
+  </form>
+  </mat-expansion-panel>
+
+  <!-- PERSONAL INFORMATION Panel -->
+  <mat-expansion-panel [disabled]="!isProfilePanelDisabled()" [expanded]="step() === 1" (opened)="setStep(1)" hideToggle>
+    <mat-expansion-panel-header>
+      <div class="mat-step-icon mat-step-icon-state-number mat-step-icon-selected">
+        <div class="mat-step-icon-content">
+          <span aria-hidden="true" class="ng-star-inserted">2</span>
+        </div>
+      </div>
+      <mat-panel-title style="font-weight: 700;">PERSONAL INFORMATION
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <!-- Profile form fields here... -->
+
+    <form [formGroup]="profileForm">
+      <div class="row g-1"> 
+        <div class="col-md-4">
+          <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+            <mat-label>Firstname</mat-label>
+            <input matInput formControlName="frmFirstName" placeholder="Firstname" required>
+          </mat-form-field>
+        </div>
+        
+        <div class="col-md-3">
+          <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+            <mat-label>Middlename</mat-label>
+            <input matInput formControlName="frmMiddleName" placeholder="Middlename" required>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+          <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+            <mat-label>Lastname</mat-label>
+            <input matInput formControlName="frmLastName" placeholder="Lastname" required>
+          </mat-form-field>
+        </div>
+        
+        <div class="col-md-1">
+          <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+            <mat-label>Ext Name</mat-label>
+            <mat-select matInput formControlName="frmExtName" required>
+              <mat-option value="None">None</mat-option>
+              <mat-option value="Sr">Sr</mat-option>
+              <mat-option value="Jr">Jr</mat-option>
+              <mat-option value="I">I</mat-option>
+              <mat-option value="II">II</mat-option>
+              <mat-option value="III">III</mat-option>
+              <mat-option value="IV">IV</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-2">
+          <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+            <mat-label>Date of Birth</mat-label>
+            <input matInput formControlName="frmDateBirth" [matDatepicker]="picker">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker">
+              <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+  
+        <div class="col-md-2">
+          <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+            <mat-label>Place of Birth</mat-label>
+            <input matInput formControlName="frmPlaceBirth" placeholder="Place of Birth" required>
+          </mat-form-field>
+        </div>
+  
+        <div class="col-md-2">
+          <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+            <mat-label>Civil Status</mat-label>
+              <mat-select matInput formControlName="frmCivilStatus">
+              <mat-option value="Single">Single</mat-option>
+              <mat-option value="Married">Married</mat-option>
+              <mat-option value="Widowed">Widowed</mat-option>
+              <mat-option value="Seperated">Seperated</mat-option>
+            </mat-select>
+            </mat-form-field>
+          </div>
+          
+          <div class="col-md-2">
+            <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+              <mat-label>Sex</mat-label>
+                <mat-select matInput formControlName="frmSex">
+                <mat-option value="Male">Male</mat-option>
+                <mat-option value="Female">Female</mat-option>
+              </mat-select>
+              </mat-form-field>
+            </div>
+  
+         <div class="info-2">
+          <p>Current Address</p>
+         </div>
+  
+         <div class="col-md-2">
+         <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+          <mat-label>Region</mat-label>
+            <mat-select matInput formControlName="frmRegion">
+            <mat-option value="Region III (CENTRAL LUZON)">Region III (CENTRAL LUZON)</mat-option>
+            <mat-option value="Region II">Region II</mat-option>
+          </mat-select>
+          </mat-form-field>
+        </div>
+        
+         <div class="col-md-2">
+        <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+          <mat-label>Province</mat-label>
+            <mat-select matInput formControlName="frmProvince">
+            <mat-option value="Zambales">Zambales</mat-option>
+            <mat-option value="Pampanga">Pampanga</mat-option>
+          </mat-select>
+          </mat-form-field>
+        </div>
+  
+        <div class="col-md-2">
+        <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+          <mat-label>City/Municipality</mat-label>
+            <mat-select matInput formControlName="frmCity">
+            <mat-option value="Olongapo">Olongapo</mat-option>
+            <mat-option value="Iba">Iba</mat-option>
+          </mat-select>
+          </mat-form-field>
+        </div>
+  
+        <div class="col-md-3">
+          <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+            <mat-label>Barangay</mat-label>
+              <mat-select matInput formControlName="frmBarangay">
+              <mat-option value="East Bajac Bajac">East Bajac Bajac</mat-option>
+              <mat-option value="West Bajac Bajac">West Bajac Bajac</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+  
+        <div class="col-md-2">
+          <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+            <mat-label>House Lot/Lot No</mat-label>
+            <input matInput formControlName="frmHouseLot" placeholder="Ex. West Tapinac" required>
+          </mat-form-field>
+        </div>
+  
+        <div class="col-md-3">
+          <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+            <mat-label>Zip Code</mat-label>
+            <input matInput formControlName="frmZipCode" placeholder="Ex. 1100" required>
+          </mat-form-field>
+        </div>
+  
+        <div class="info-2">
+          <p style="font-style: italic; font-weight: 500;">Personal Disability Information</p>
+         </div>
+  
+         <div class="col-md-2">
+          <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+            <mat-label>Are you a person with disability?</mat-label>
+              <mat-select matInput formControlName="frmDisability">
+              <mat-option value="No">No</mat-option>
+              <mat-option value="Yes">Yes</mat-option>
+            </mat-select>
+          </mat-form-field>
+         </div>
+  
+         <div class="col-md-2">
+          <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+            <mat-label>Disability Category</mat-label>
+              <mat-select>
+              <mat-option value="Physical Disability">Physical Disability</mat-option>
+              <mat-option value="Visual Disability">Visual Disability</mat-option>
+            </mat-select>
+          </mat-form-field>
+         </div>
+  
+         <div class="col-md-2">
+          <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+            <mat-label>Disability Details</mat-label>
+            <textarea matInput></textarea>
+          </mat-form-field>
+         </div>
+      </div>
+
+      <mat-action-row>
+        <button mat-stroked-button [disabled]="!isProfileFormValid()" (click)="nextStep()">Done</button>
+      </mat-action-row>
+    </form>
+  </mat-expansion-panel>
+
+  <!-- EDUCATION Panel -->
+  <mat-expansion-panel [disabled]="!isEducationPanelDisabled()" [expanded]="step() === 2" (opened)="setStep(2)" hideToggle>
+    <mat-expansion-panel-header>
+      <div class="mat-step-icon mat-step-icon-state-number mat-step-icon-selected">
+        <div class="mat-step-icon-content">
+          <span aria-hidden="true" class="ng-star-inserted">3</span>
+        </div>
+      </div>
+      <mat-panel-title style="font-weight: 700;">EDUCATION
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <!-- Education form fields here... -->
+    <form [formGroup]="educationForm">
+    <div class="row g-1"> 
+    <div class="col-md-3">
+      <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+        <mat-label>College</mat-label>
+        <input matInput formControlName="frmCollege" placeholder="College" required>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-3">
+      <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+        <mat-label>Program</mat-label>
+        <input matInput formControlName="frmProgram" placeholder="Program" required>
+      </mat-form-field>
+    </div>
+    
+    <div class="col-md-3">
+      <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+        <mat-label>Year Level</mat-label>
+        <input matInput formControlName="frmYearLevel" placeholder="Year Level" required>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-3">
+      <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+        <mat-label>Scholarship Type</mat-label>
+          <mat-select matInput formControlName="frmScholarT">
+          <mat-option value="FHE">FHE</mat-option>
+          <mat-option value="Paying">Paying</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-3">
+      <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+        <mat-label>Other Scholarship</mat-label>
+        <input matInput placeholder="Other Scholarship" required>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-3">
+      <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+        <mat-label>Elementay School</mat-label>
+        <input matInput formControlName="frmElem" placeholder="Elementay School" required>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-3">
+      <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+        <mat-label>Year Graduated</mat-label>
+        <input matInput formControlName="frmYearG" placeholder="Year Graduated" required>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-3">
+      <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+        <mat-label>SHS/HS Graduated</mat-label>
+        <input matInput formControlName="frmSHSHS" placeholder="SHS/HS Graduated" required>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-3">
+      <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+        <mat-label>Year Graduated</mat-label>
+        <input matInput formControlName="frmYearSHSG" placeholder="Year Graduated" required>
+      </mat-form-field>
+    </div>
+  </div>
+
+    <mat-action-row>
+      <button mat-stroked-button [disabled]="!isEducationFormValid()" (click)="nextStep()">Done</button>
+    </mat-action-row>
+    </form>
+  </mat-expansion-panel>
+
+  <!-- FAMILY Panel -->
+  <mat-expansion-panel [disabled]="!isFamilyPanelDisabled()" [expanded]="step() === 3" (opened)="setStep(3)" hideToggle>
+    <mat-expansion-panel-header>
+      <div class="mat-step-icon mat-step-icon-state-number mat-step-icon-selected">
+        <div class="mat-step-icon-content">
+          <span aria-hidden="true" class="ng-star-inserted">4</span>
+        </div>
+      </div>
+
+      <mat-panel-title style="font-weight: 700;">FAMILY
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <!-- Family form fields here... -->
+      <!-- Father's Profile -->
+    <form [formGroup]="familyForm">
+    <div class="info-3">
+      <p>Father's Profile</p>
+     </div>
+
+     <div class="row g-1"> 
+      <div class="col-md-3">
+        <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="frmFatherFN" placeholder="First Name" required>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-3">
+        <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+          <mat-label>Middle Name</mat-label>
+          <input matInput formControlName="frmFatherMN" placeholder="Middle Name" required>
+        </mat-form-field>
+      </div>
+      
+      <div class="col-md-3">
+        <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="frmFatherLN" placeholder="Last Name" required>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-2">
+        <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+          <mat-label>Occupation</mat-label>
+          <input matInput formControlName="frmFatherO" placeholder="Occupation" required>
+        </mat-form-field>
+      </div>
+
+       <!-- Mother's Profile -->
+      <div class="info-3">
+        <p>Mother's Profile</p>
+       </div>
+
+       <div class="col-md-3">
+        <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="frmMotherFN" placeholder="First Name" required>
+        </mat-form-field>
+       </div>
+
+        <div class="col-md-3">
+          <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+            <mat-label>Middle Name</mat-label>
+            <input matInput formControlName="frmMotherMN" placeholder="Middle Name" required>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-3">
+          <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="frmMotherLN" placeholder="Last Name" required>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-2">
+          <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+            <mat-label>Occupation</mat-label>
+            <input matInput formControlName="frmMotherO" placeholder="Occupation" required>
+          </mat-form-field>
+        </div>
+       </div>
+    <mat-action-row>
+      <button mat-stroked-button [disabled]="!isFamilyFormValid()" (click)="nextStep()">Done</button>
+    </mat-action-row>
+    </form>
+  </mat-expansion-panel>
+
+  <!-- HEALTH Panel -->
+  <mat-expansion-panel [disabled]="!isHealthPanelDisabled()" [expanded]="step() === 4" (opened)="setStep(4)" hideToggle>
+    <mat-expansion-panel-header>
+      <div class="mat-step-icon mat-step-icon-state-number mat-step-icon-selected">
+        <div class="mat-step-icon-content">
+          <span aria-hidden="true" class="ng-star-inserted">5</span>
+        </div>
+      </div>
+      
+      <mat-panel-title style="font-weight: 700;">HEALTH
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <!-- Health form fields here... -->
+    <div class="info-4">
+      <p>Are you vaccinated?</p>
+     </div>
+
+     <form [formGroup]="healthForm">
+      <div class="row g-1"> 
+     <div class="col-md-4">
+      <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+        <mat-select matInput formControlName="frmVaccinated">
+        <mat-option value="I am fully vaccinated (1st and 2nd dose)">I am fully vaccinated (1st and 2nd dose)</mat-option>
+        <mat-option value="I am fully vaccinated - Booster">I am fully vaccinated - Booster</mat-option>
+      </mat-select>
+    </mat-form-field>
+     </div>
+
+    <mat-action-row>
+      <button mat-stroked-button [disabled]="!isHealthFormValid()" (click)="nextStep()">Done</button>
+    </mat-action-row>
+      </div>
+  </form>
+  </mat-expansion-panel>
+
+    <!-- Government Panel -->
+    <mat-expansion-panel [disabled]="!isGovernmentPanelDisabled()" [expanded]="step() === 5" (opened)="setStep(5)" hideToggle>
+      <mat-expansion-panel-header>
+        <div class="mat-step-icon mat-step-icon-state-number mat-step-icon-selected">
+          <div class="mat-step-icon-content">
+            <span aria-hidden="true" class="ng-star-inserted">6</span>
+          </div>
+        </div>
+
+        <mat-panel-title style="font-weight: 700;">GOVERNMENT
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      
+      <!-- Government Fields -->
+     <form [formGroup]="governmentForm">
+      <div class="row g-1"> 
+      <section class="example-section">
+        <mat-checkbox class="example-margin">Pantawid Pamilya Pilipino Program (4Ps)
+        </mat-checkbox>
+      </section>
+
+      <section class="example-section">
+        <mat-checkbox class="example-margin">EGSPP Beneficiary
+        </mat-checkbox>
+      </section>
+
+      
+      <section class="example-section">
+        <mat-checkbox class="example-margin">Listahan 2.0 - DSWD
+        </mat-checkbox>
+      </section>
+
+      <div class="col-md-2">
+        <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+          <mat-label>Household Number</mat-label>
+          <input matInput placeholder="Household Number" required>
+        </mat-form-field>
+      </div>
+
+      <section class="example-section">
+        <mat-checkbox class="example-margin">Indigenous People (IPS)
+        </mat-checkbox>
+      </section>
+
+      <div class="col-md-2">
+        <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+          <mat-label>IP Group</mat-label>
+          <input matInput placeholder="IP Group" required>
+        </mat-form-field>
+      </div>
+
+      <mat-action-row>
+        <button mat-stroked-button (click)="nextStep()">Done</button>
+      </mat-action-row>
+    </div>
+  </form>
+  </mat-expansion-panel>
+
+   <!-- Other Info Panel -->
+   <mat-expansion-panel [disabled]="!isOtherInfoPanelDisabled()" [expanded]="step() === 6" (opened)="setStep(6)" hideToggle>
+    <mat-expansion-panel-header>
+      <div class="mat-step-icon mat-step-icon-state-number mat-step-icon-selected">
+        <div class="mat-step-icon-content">
+          <span aria-hidden="true" class="ng-star-inserted">7</span>
+        </div>
+      </div>
+
+      <mat-panel-title style="font-weight: 700;">OTHER INFORMATION
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+     <!-- Other Info Fields -->
+     <div class="info-5">
+      <p>Average Monthly Income</p>
+     </div>
+
+     <form [formGroup]="otherinfoForm">
+     <div class="row g-1"> 
+     <div class="col-md-4">
+      <mat-form-field class="form-full" [appearance]="appearance" [floatLabel]="floatLabel">
+        <mat-label>Specify your family's monthly income</mat-label>
+          <mat-select matInput >
+          <mat-option value="Less than 9,250">Less than 9,250</mat-option>
+          <mat-option value="9,250-14,000">9,250-14,000</mat-option>
+        </mat-select>
+      </mat-form-field>
+     </div>
+     </div>
+     <mat-action-row>
+      <button mat-stroked-button (click)="nextStep()">Done</button>
+    </mat-action-row>
+</form>
+</mat-expansion-panel>
+
+<!-- COMPLETED Panel -->
+<mat-expansion-panel [disabled]="!isCompletedDisabled()" [expanded]="step() === 7" (opened)="setStep(7)" hideToggle>
+  <mat-expansion-panel-header>
+    <div class="mat-step-icon mat-step-icon-state-number mat-step-icon-selected">
+      <div class="mat-step-icon-content">
+        <span aria-hidden="true" class="ng-star-inserted">8</span>
+      </div>
+    </div>
+
+    <mat-panel-title style="font-weight: 700;">COMPLETED
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+
+   <!-- Completed text -->
+   <form [formGroup]="completedForm">
+    <div class="row g-1">
+      <div class="info-6">
+        <p>You have completed updating your profile..</p>
+       </div>
+
+       <div class="info-7">
+        <p>Thank you for completing filling up the form.</p>
+       </div>
+    </div>
+  </form>
+</mat-expansion-panel>
+</mat-accordion>

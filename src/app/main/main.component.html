@@ -1,0 +1,48 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar style="background-color: #11320b;">
+      <div class="appinfo-container text-center">
+        <img class="appinfo-profile" [src]="sjcLogo" alt="SJC Logo"><br>
+        <span style="color: lightgray;" class="appinfo-sjc">Student (appversion)</span>
+      </div>
+    </mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item routerLink="welcome" routerLinkActive="isactive"><mat-icon style="margin-right: 3px;">sentiment_satisfied_alt</mat-icon>Welcome</a>
+      <a mat-list-item routerLink="dashboard" routerLinkActive="isactive"><mat-icon style="margin-right: 3px;">dashboard</mat-icon>Dashboard</a>
+      <a mat-list-item routerLink="profile" routerLinkActive="isactive"><mat-icon style="margin-right: 3px;">account_box</mat-icon>Profile</a>
+      <a mat-list-item routerLink="schedule" routerLinkActive="isactive"><mat-icon style="margin-right: 3px;">schedule</mat-icon>Schedule</a>
+    </mat-nav-list>
+  </mat-sidenav> 
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      @if (isHandset$ | async) {
+        <button style="color: white;"
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()">
+          <mat-icon style="position: relative; right: 20px; bottom: 3px;" aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+      }
+      <span style="font-size: 22px;">Student Portal</span>
+      <span style="position: sticky; left: 100%;" class="appinfo-user pointer-hand ng-star-inserted">JAKE CYRUS</span>
+      <button style="position: absolute; left: 88%; top: 18%; color: white;" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="openChangePasswordDialog()">Change Password</button>
+        <button mat-menu-item (click)="openLogoutDialog()">Logout</button>
+      </mat-menu>
+    </mat-toolbar>
+
+    <mat-toolbar color="primary-1">
+      <span style="color: white; font-size: 15px;">ENROLLMENT SYSTEM</span>
+      <img class="appinfo-banner" src="assets/image/sjcobanner-2.svg" alt="SJC Banner">
+    </mat-toolbar>
+    <div class="admin-container content"><router-outlet (activate)="onActivate()" /></div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

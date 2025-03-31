@@ -1,0 +1,22 @@
+<div class="login-container">
+    <mat-card class="login-card">
+      <img style="width: 100px; align-self: center;" src="assets/image/sjclogo.png">
+      <mat-card-title class="text-center"><strong>SJCO PORTAL</strong></mat-card-title>
+      <mat-card-title class="text-center-1"><strong>Students Enrollment System</strong></mat-card-title>
+      <mat-card-content>
+        <form (ngLogin)="onLogin()">
+          <mat-form-field appearance="fill">
+            <mat-label>Student Number</mat-label>
+            <mat-hint>Enter your student number</mat-hint>
+            <input matInput [(ngModel)]="apiLoginObj.EmailId" name="studentnumber" required>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <mat-hint>Enter your password</mat-hint>
+            <input matInput [(ngModel)]="apiLoginObj.Password" name="password" type="password" required>
+          </mat-form-field>
+          <button style="background-color: #11320b;" mat-flat-button routerLink="/main" routerLinkActive="isactive" (click)="onLogin()">Login</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
